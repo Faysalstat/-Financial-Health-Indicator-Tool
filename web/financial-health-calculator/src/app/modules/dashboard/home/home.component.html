@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="javascript:void(0)">FinHealth App</a>
+      <button mat-fab color="warn">
+        <mat-icon>power_settings_new</mat-icon>
+      </button>
+    </div>
+  </nav>
+  <div class="container-fluid mt-3">
+    
+    <div class="row">
+        <div class="col-md-2">
+            
+          <div class="d-grid gap-3 side-nav">
+            <a routerLink="health-calculator">
+                <button type="button" class="btn btn-primary btn-block">Health Score Calculator</button>
+            </a>
+            <a routerLink="balance-sheet">
+                <button type="button" class="btn btn-primary btn-block">Balance Sheet</button>
+            </a>
+            <a routerLink="charts">
+                <button type="button" class="btn btn-primary btn-block">Charts</button>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-10 side-nav-border">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,49 @@
+<mat-card class="mt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Records</h2>
+            <hr class="title-hr">
+        </div>
+        <div class="col-md-3">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Select Year</mat-label>
+                <mat-select (selectionChange)="fetchRecords()" [ngModelOptions]="{standalone:true}" [(ngModel)]="query.year">
+                    <mat-option *ngFor="let year of years" [value]="year.value">{{year.label}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Select Month</mat-label>
+                <mat-select (selectionChange)="fetchRecords()" [ngModelOptions]="{standalone:true}" [(ngModel)]="query.month">
+                    <mat-option *ngFor="let month of months" [value]="month.value">{{month.label}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Year</th>
+                        <th>Month</th>
+                        <th>Total Assets</th>
+                        <th>Total Debt</th>
+                        <th>Total Income</th>
+                        <th>Total Expense</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr></tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="8"></th>
+                    </tr>
+                </tfoot>
+
+            </table>
+        </div>
+    </div>
+</mat-card>

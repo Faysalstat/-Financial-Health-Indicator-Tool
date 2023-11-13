@@ -1,0 +1,31 @@
+server.port: 8081
+spring:
+  application:
+    name: health-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: 12345
+    url: jdbc:postgresql://localhost:5432/administration?currentSchema=financial_tool_db
+    username: administration
+  jpa:
+    hibernate:
+      ddl-auto: create
+#configs
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+  endpoint:
+    health:
+      show-details: always
+
+
+
+
+
