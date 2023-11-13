@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8000/api";
+const BASE_URL = "http://localhost:8000";
 
 
 export const AuthenticationUrls = {
@@ -9,7 +9,7 @@ export const AuthenticationUrls = {
 }
 
 export const FinanceServiceUrls = {
-  SAVE_FINACE_RECORD : BASE_URL + "/health/finance/save",
-  FETCH_ALL_FINACE_RECORD : BASE_URL + "/finance/getall",
+  SAVE_FINACE_RECORD : BASE_URL + "/health/api/save",
+  FETCH_ALL_FINACE_RECORD : BASE_URL + "/health/api/getall",
 
 }

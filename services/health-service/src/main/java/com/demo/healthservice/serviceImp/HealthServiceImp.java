@@ -1,6 +1,7 @@
 package com.demo.healthservice.serviceImp;
 
 import com.demo.healthservice.domain.BalanceRecord;
+import com.demo.healthservice.domain.ResponseBodyDomain;
 import com.demo.healthservice.repository.HealthRepository;
 import com.demo.healthservice.service.HealthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,22 @@ public class HealthServiceImp implements HealthService {
     }
 
     @Override
-    public BalanceRecord save(BalanceRecord balanceRecord) {
-        return healthRepository.save(balanceRecord);
+    public ResponseBodyDomain<BalanceRecord> saveRecord(BalanceRecord balanceRecord) {
+        BalanceRecord resBalanceRecord = new BalanceRecord();
+        ResponseBodyDomain<BalanceRecord> responseBodyDomain = new ResponseBodyDomain();
+        try{
+            resBalanceRecord = healthRepository.save(balanceRecord);
+            responseBodyDomain.setMessage("Successfully Saved");
+            responseBodyDomain.setIsSuccess(true);
+            responseBodyDomain.setBody(resBalanceRecord);
+
+        }catch (Exception e){
+            responseBodyDomain.setMessage("Saving Failed. Error"+ e.getMessage());
+            responseBodyDomain.setIsSuccess(false);
+            responseBodyDomain.setBody(resBalanceRecord);
+        }finally {
+            return responseBodyDomain;
+        }
+
     }
 }

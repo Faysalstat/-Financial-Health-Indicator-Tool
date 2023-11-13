@@ -1,23 +1,30 @@
 package com.demo.healthservice.controller;
 
 import com.demo.healthservice.domain.BalanceRecord;
+import com.demo.healthservice.domain.ResponseBodyDomain;
 import com.demo.healthservice.service.HealthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("/health/api")
+@CrossOrigin(origins = "http://localhost:4200")
 public class HealthController {
 
     @Autowired
     private HealthService healthService;
     @PostMapping("/save")
-    public ResponseEntity<String> calculateHealth(@RequestBody BalanceRecord balanceRecord){
+    public ResponseEntity<ResponseBodyDomain<BalanceRecord>> calculateHealth(@RequestBody BalanceRecord balanceRecord){
         System.out.println(balanceRecord.getMonth());
-        BalanceRecord balanceRecordRes = healthService.save(balanceRecord);
-        return ResponseEntity.ok("All Good");
+        ResponseBodyDomain<BalanceRecord> balanceRecordRes = healthService.saveRecord(balanceRecord);
+        return ResponseEntity.ok(balanceRecordRes);
+    }
+
+    @GetMapping("/getall")
+    public ResponseEntity<String> getAll(){
+        return ResponseEntity.ok("OK");
     }
 }

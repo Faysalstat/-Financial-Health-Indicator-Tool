@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FinanceServiceUrls } from '../utils/api-constants';
@@ -11,6 +11,9 @@ export class FinanceService {
   constructor(private http: HttpClient) {}
   
   public saveFinaceRecord(queryParams: Map<string, any>): Observable<any> {
-    return this.http.post(FinanceServiceUrls.SAVE_FINACE_RECORD, queryParams.get('model'));
+    const headers = new HttpHeaders()
+   .set('content-type', 'application/json')
+   .set('Access-Control-Allow-Origin', '*');
+    return this.http.post(FinanceServiceUrls.SAVE_FINACE_RECORD, queryParams.get('model'),{ 'headers': headers });
   }
 }

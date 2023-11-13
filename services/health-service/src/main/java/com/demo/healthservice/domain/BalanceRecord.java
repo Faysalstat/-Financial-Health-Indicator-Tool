@@ -1,9 +1,6 @@
 package com.demo.healthservice.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -15,6 +12,7 @@ import lombok.*;
 @Table(name = "balance_records")
 public class BalanceRecord {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
 

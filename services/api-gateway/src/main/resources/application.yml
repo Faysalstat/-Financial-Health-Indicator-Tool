@@ -35,16 +35,21 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: health-service
-          uri: lb://health-service  # Load-balanced route to Service One
-          predicates:
-            - Path=/api/health/**
-          filters:
-            - StripPrefix=1  # Remove '/service-one' prefix from the request path
-            - name: CircuitBreaker
-              args:
-                name: health-service
-                fallbackUri: forward:/orderservice/fallback
+      - id: health-service
+        uri: lb://health-service  # Load-balanced route to Service Two
+        predicates:
+        - Path=/health/**
+        filters:
+        - name: CircuitBreaker
+          args:
+            name: health-service
+            fallbackUri: forward:/healthservice/fallback
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: 'http://localhost:4200'
+            allowedHeaders:
+              - Content-Type
 ## routes end
 
 
