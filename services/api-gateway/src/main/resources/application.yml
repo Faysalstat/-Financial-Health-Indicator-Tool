@@ -30,27 +30,46 @@ resilience4j:
 
 #spring configs
 spring:
+  main:
+    web-application-type: reactive
   application:
     name: api-gateway
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeader: "*"
+            allowedMethods: "*"
       routes:
       - id: health-service
         uri: lb://health-service  # Load-balanced route to Service Two
         predicates:
         - Path=/health/**
         filters:
+        - name: InMemoryRateLimiter
+          args:
+            keyResolver: "#{@apiKeyResolver}"
+            limit: 5
+            httpStatus: 429
         - name: CircuitBreaker
           args:
             name: health-service
             fallbackUri: forward:/healthservice/fallback
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: 'http://localhost:4200'
-            allowedHeaders:
-              - Content-Type
-## routes end
+
+apiKeyResolver:
+  name: apiKeyResolver
+  class: org.springframework.cloud.gateway.filter.ratelimit.KeyResolver
+  uriKeyExtractor: "#{'defaultKey'}"
+  userKeyExtractor: "#{'defaultKey'}"
+
+inMemoryRateLimiter:
+  name: inMemoryRateLimiter
+  class: com.demo.apigateway.config.InMemoryRateLimiterGatewayFilterFactory$Config
+  keyResolver: "#{@apiKeyResolver}"
+  limit: 5
+  httpStatus: 429  # You can customize the HTTP status code
 
 
 #client-secret: qmHnZe1IYvSedAlO1G9ykgPBozBptAyx

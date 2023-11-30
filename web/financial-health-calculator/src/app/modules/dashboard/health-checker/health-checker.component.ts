@@ -41,10 +41,10 @@ export class HealthCheckerComponent implements OnInit {
     this.inputForm = this.formBuilder.group({
       year:[this.today.getFullYear().toString(),[Validators.required]],
       month:[(this.today.getMonth()+1).toString(),[Validators.required]],
-      totalAsset:[0,[Validators.required,Validators.min(1)]],
-      totalDebt:[0,[Validators.required,Validators.min(1)]],
-      totalExpense:[0,[Validators.required,Validators.min(1)]],
-      totalIncome:[0,[Validators.required,Validators.min(1)]]
+      assetAmount:[0,[Validators.required,Validators.min(1)]],
+      debtAmount:[0,[Validators.required,Validators.min(1)]],
+      incomeAmount:[0,[Validators.required,Validators.min(1)]],
+      expenseAmount:[0,[Validators.required,Validators.min(1)]]
     });
   }
   generateYearAndMonths(){

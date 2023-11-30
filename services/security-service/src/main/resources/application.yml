@@ -1,0 +1,12 @@
+server.port: 8888
+spring:
+  application:
+    name: security-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: 12345
+    url: jdbc:postgresql://localhost:5432/administration?currentSchema=financial_tool_db
+    username: administration
+  jpa:
+    hibernate:
+      ddl-auto: create

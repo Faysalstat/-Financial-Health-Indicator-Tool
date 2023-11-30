@@ -7,7 +7,11 @@ import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuit
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JConfigBuilder;
 import org.springframework.cloud.client.circuitbreaker.Customizer;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.gateway.filter.factory.RequestRateLimiterGatewayFilterFactory;
+import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
+import org.springframework.cloud.gateway.filter.ratelimit.RedisRateLimiter;
 import org.springframework.context.annotation.Bean;
+import reactor.core.publisher.Mono;
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -26,5 +30,14 @@ public class ApiGatewayApplication {
 				).build()
 		);
 	}
+
+	@Bean
+	public KeyResolver apiKeyResolver() {
+		return exchange -> Mono.just(exchange.getRequest().getHeaders().getFirst("API-Key") != null ?
+				exchange.getRequest().getHeaders().getFirst("API-Key") :
+				"defaultKey");
+	}
+
+
 
 }

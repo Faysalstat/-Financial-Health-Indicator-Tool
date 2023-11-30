@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/health/api")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class HealthController {
 
     @Autowired
@@ -25,6 +25,7 @@ public class HealthController {
 
     @GetMapping("/getall")
     public ResponseEntity<String> getAll(){
+        System.out.println("Get all got hit");
         return ResponseEntity.ok("OK");
     }
 }
