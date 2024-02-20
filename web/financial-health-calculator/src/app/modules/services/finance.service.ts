@@ -15,6 +15,6 @@ export class FinanceService {
   public saveFinaceRecord(queryParams: Map<string, any>): Observable<any> {
     const headers = new HttpHeaders()
    .set('Access-Control-Allow-Origin', '*');
-    return this.http.post(FinanceServiceUrls.SAVE_FINACE_RECORD, queryParams.get('model'),{headers:headers});
+    return this.http.post(FinanceServiceUrls.SAVE_FINACE_RECORD, queryParams.get('model'));
   }
 }

@@ -53,7 +53,15 @@ export class HealthCheckerComponent implements OnInit {
     }
   }
   calculate(){
-    let model = this.inputForm.value;
+    // let model = this.inputForm.value;
+    let model = {
+      year: "2024",
+      month: "01",
+      assetAmount: 1000,
+      debtAmount: 2000,
+      incomeAmount: 12000,
+      expenseAmount: 3000
+    }
     const params: Map<string, any> = new Map();
     params.set('model', model);
     this.financeService.saveFinaceRecord(params).subscribe({
